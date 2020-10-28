@@ -12,29 +12,39 @@ object toni {
 	// Pegar acá todo lo que tenían de Toni en la etapa 1
 	
 	method sembrarMaiz() {
-		plantasSembradas.add(new Maiz(position=self.position()))
-	}
+			plantasSembradas.add(new Maiz(position=self.position()))
+			game.addVisual(plantasSembradas.last())		
+	}		
+
 	
 	method sembrarTrigo() {
-		plantasSembradas.add(new Trigo(position=self.position()))
-	}
+			plantasSembradas.add(new Trigo(position=self.position()))
+			game.addVisual(plantasSembradas.last())		
+	}		
+
 
 	method sembrarTomaco() {
-		plantasSembradas.add(new Tomaco(position=self.position()))		
-	}
+			plantasSembradas.add(new Tomaco(position=self.position()))
+			game.addVisual(plantasSembradas.last())		
+	}		
+
 
 	method regarLasPlantas() {
 		plantasSembradas.forEach( { p=>p.regar() } )
+	}
+	
+	method regarPlanta () {
+		game.colliders(self).forEach ( { planta => planta.regar() } )
 	}
 	
 	method plantasListasParaCosechar() {
 		return plantasSembradas.filter( { p=>p.listaParaCosechar() } ).asSet()
 	}
 
-	method cosecharPlanta () {
-		game.colliders ( self ) .forEach ( {planta =>
+	method cosecharPlanta() {
+		game.colliders(self).forEach( {planta =>
 			if (planta.listaParaCosechar()) {
-				game.removeVisual (planta) 
+				game.removeVisual(planta) 
 				plantasCosechadas.add(planta)
 				plantasSembradas.remove(planta)
 			}
@@ -44,9 +54,9 @@ object toni {
 	
 
 	method cosecharTodo() {
+		self.plantasListasParaCosechar().forEach( { p=>p.cosechate() } )
 		plantasCosechadas.addAll(self.plantasListasParaCosechar())
 		plantasSembradas.removeAll(self.plantasListasParaCosechar())
-		
 	}
 	
 	method valorCosecha() {

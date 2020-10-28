@@ -1,3 +1,5 @@
+import wollok.game.*
+
 
 class Maiz {
 	var property position
@@ -19,7 +21,9 @@ class Maiz {
 		if (not esAdulta) {esAdulta=true}
 	}
 	
-	method listaParaCosechar() { return esAdulta }	
+	method listaParaCosechar() { return esAdulta }
+	
+	method cosechate() { game.removeVisual(self) }	
 }
 
 class Trigo {
@@ -50,6 +54,8 @@ class Trigo {
 	
 	method listaParaCosechar() { return etapa >= 2 }
 	
+	method cosechate() { game.removeVisual(self) }
+	
 }
 
 class Tomaco {
@@ -63,6 +69,7 @@ class Tomaco {
 	method cuantoOroDa(){ return 80 }
 	method regar() { }
 	method listaParaCosechar() { return true }
+	method cosechate() { game.removeVisual(self) }	
 }
 
 

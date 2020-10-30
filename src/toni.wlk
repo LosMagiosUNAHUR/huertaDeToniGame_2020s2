@@ -1,5 +1,6 @@
 import wollok.game.*
 import plantas.*
+import pachamama.*
 
 object toni {
 	const property image = "toni.png"
@@ -79,6 +80,15 @@ object toni {
 	method convieneRegar() {
 		return self.plantasSembradas().any( { p=> not p.listaParaCosechar() } )
 	}
+	
+	method hacerOfrenda(pacha) { 
+		pacha.rotarPosicion()
+		plantasSembradas.anyOne().cosechate() 
+		if (not pacha.estaAgradecida()) { pacha.nivelAgradecimiento(10) }	
+		else {pacha.llover() self.regarLasPlantas()}					
+	}
+	
+//	
 	
 	
 }

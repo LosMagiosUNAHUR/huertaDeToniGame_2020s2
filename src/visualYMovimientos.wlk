@@ -2,12 +2,18 @@ import wollok.game.*
 import plantas.*
 import direcciones.*
 import toni.*
+import pachamama.*
 
 object juego {
 	var property personajeActual = toni
 	
 	method configurarTeclado() {
-		
+/* 		Acciones de la Pachamama */
+		keyboard.f().onPressDo({ pachamama.fumigar() })
+		keyboard.l().onPressDo({ pachamama.llover() })		
+
+
+/*		Acciones de Toni */		
 		keyboard.m().onPressDo({ toni.sembrarMaiz() })
 		keyboard.t().onPressDo({ toni.sembrarTrigo() })
 		keyboard.o().onPressDo({ toni.sembrarTomaco() })
@@ -45,8 +51,13 @@ object juego {
 				personajeActual.position(personajeActual.position().right(1))
 			}
 		})
+		
+		
 	}
 	method configurarPersonajes(){
 		game.addVisual(toni)
+		game.addVisual(pachamama)
 	}	
+	
+	
 }

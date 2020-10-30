@@ -1,5 +1,6 @@
 import wollok.game.*
-
+import pachamama.*
+import toni.*
 
 class Maiz {
 	var property position
@@ -7,15 +8,15 @@ class Maiz {
 	const property esAptoCeliaco = true
 	
 	method image() {
-		if (esAdulta) {
-			return "maiz_adulto.png"
-		} 
-		else {
-			return "maiz_bebe.png"
-		}	
+		return if (esAdulta and pachamama.estaAgradecida()) { "maiz_gigante_opt.png" } 
+		else if (esAdulta) { "maiz_adulto.png" }
+		else { "maiz_bebe.png" }
+			
 	}
 	
-	method cuantoOroDa(){ return 150}
+	method cuantoOroDa() { return if(pachamama.estaAgradecida()) { 180 }
+								  else { 150 }
+	}
 		
 	method regar() {
 		if (not esAdulta) {esAdulta=true}
@@ -23,7 +24,7 @@ class Maiz {
 	
 	method listaParaCosechar() { return esAdulta }
 	
-	method cosechate() { game.removeVisual(self) }	
+	method cosechate() { game.removeVisual(self) toni.plantasSembradas().remove(self) }	
 }
 
 class Trigo {
@@ -47,14 +48,15 @@ class Trigo {
 	}
 	
 	method regar() {
-		if (etapa.between(0,2)) { etapa += 1}
-		else { etapa=0 }
-	
+//		if (etapa.between(0,2)) { etapa += 1}
+//		else { etapa=0 }
+		if (pachamama.estaAgradecida()) { etapa = (etapa + 2).rem(4) }
+		else { etapa = (etapa + 1).rem(4) }	
 	}
 	
 	method listaParaCosechar() { return etapa >= 2 }
 	
-	method cosechate() { game.removeVisual(self) }
+	method cosechate() { game.removeVisual(self) toni.plantasSembradas().remove(self) }
 	
 }
 
@@ -62,14 +64,15 @@ class Tomaco {
 	var property position
 	const property esAptoCeliaco = true
 	
-	method image() {
-		return "tomaco_ok.png"
+	method image() { 
+		return if (pachamama.estaAgradecida()) { "tomaco_podrido.png" }
+		else { "tomaco_ok.png" }			
 	}
 	
 	method cuantoOroDa(){ return 80 }
 	method regar() { }
 	method listaParaCosechar() { return true }
-	method cosechate() { game.removeVisual(self) }	
+	method cosechate() { game.removeVisual(self) toni.plantasSembradas().remove(self) }	
 }
 
 

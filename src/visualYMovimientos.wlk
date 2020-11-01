@@ -3,6 +3,7 @@ import plantas.*
 import direcciones.*
 import toni.*
 import pachamama.*
+import mercados.*
 
 object juego {
 	var property personajeActual = toni
@@ -21,10 +22,10 @@ object juego {
 		keyboard.x().onPressDo({ toni.cosecharTodo() })
 		keyboard.r().onPressDo({ toni.regarPlanta() })
 		keyboard.a().onPressDo({ toni.regarLasPlantas() })
-		keyboard.v().onPressDo({ toni.venderCosecha() })
+		keyboard.v().onPressDo({ toni.venderEnMercado() })
 		keyboard.space().onPressDo({
-			game.say(toni,"tengo" + toni.oroObtenido() + " de oro obtenido" + 
-			"y me quedan" + toni.plantasCosechadas().size() + "para vender")
+			game.say(toni,"Tengo " + toni.oroObtenido() + " de oro obtenido " + 
+			" y me quedan " + toni.plantasCosechadas().size() + " plantas para vender")
 		})
 		self.configurarMovimiento()
 		
@@ -57,6 +58,8 @@ object juego {
 	method configurarPersonajes(){
 		game.addVisual(toni)
 		game.addVisual(pachamama)
+		game.addVisual(mercadoCentral)
+		game.addVisual(mercadoChino)
 	}	
 	
 	

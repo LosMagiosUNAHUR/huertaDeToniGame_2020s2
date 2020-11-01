@@ -3,11 +3,12 @@ import toni.*
 import plantas.*
 import visualYMovimientos.*
 import pachamama.*
+import mercados.*
 
 program huertaDeToni {
 	game.width(15)
 	game.height(15)
-	
+
 		
 	// Configuramos una imagen de fondo, que se repite para cada celda del tablero.
 	game.ground("tierra.png")

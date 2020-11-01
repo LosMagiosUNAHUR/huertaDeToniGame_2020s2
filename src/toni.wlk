@@ -1,6 +1,8 @@
 import wollok.game.*
 import plantas.*
 import pachamama.*
+import mercados.*
+import visualYMovimientos.*
 
 object toni {
 	const property image = "toni.png"
@@ -9,7 +11,8 @@ object toni {
 	var property plantasCosechadas = []
 	var property oroObtenido = 0
 	var property gastoDiario = 200
-	
+
+		
 	// Pegar acá todo lo que tenían de Toni en la etapa 1
 	
 	method sembrarMaiz() {
@@ -39,25 +42,20 @@ object toni {
 	}
 	
 	method plantasListasParaCosechar() {
-		return plantasSembradas.filter( { p=>p.listaParaCosechar() } ).asSet()
+		return plantasSembradas.filter( { p=>p.listaParaCosechar() } )
 	}
 
 	method cosecharPlanta() {
-		game.colliders(self).forEach( {planta =>
-			if (planta.listaParaCosechar()) {
+		const planta = game.uniqueCollider(self)
+		if (planta.listaParaCosechar()) {
 				game.removeVisual(planta) 
 				plantasCosechadas.add(planta)
-				plantasSembradas.remove(planta)
-			}
-			}
-		)
+				plantasSembradas.remove(planta)			
+		}
 	}
-	
 
 	method cosecharTodo() {
-		self.plantasListasParaCosechar().forEach( { p=>p.cosechate() } )
-		plantasCosechadas.addAll(self.plantasListasParaCosechar())
-		plantasSembradas.removeAll(self.plantasListasParaCosechar())
+		self.plantasListasParaCosechar()       .forEach( { p=>p.cosechate() } )
 	}
 	
 	method valorCosecha() {
@@ -83,12 +81,18 @@ object toni {
 	
 	method hacerOfrenda(pacha) { 
 		pacha.rotarPosicion()
-		plantasSembradas.anyOne().cosechate() 
+		plantasSembradas.anyOne().serOfrenda() 
 		if (not pacha.estaAgradecida()) { pacha.nivelAgradecimiento(10) }	
 		else {pacha.llover() self.regarLasPlantas()}					
 	}
 	
-//	
+	method venderEnMercado() {
+		if(position == mercadoCentral.position() ) 
+		{ mercadoCentral.aceptarCompra() }
+		else if (position == mercadoChino.position()) 
+			{ mercadoChino.aceptarCompra() }
+		else{ self.error("no hay ningun mercado")}
+	}	
 	
 	
 }

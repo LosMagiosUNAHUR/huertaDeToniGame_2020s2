@@ -2,10 +2,26 @@ import wollok.game.*
 import pachamama.*
 import toni.*
 
-class Maiz {
+class Plantas {
 	var property position
+	
+	method serOfrenda() {
+		game.removeVisual(self) 
+		toni.plantasSembradas().remove(self)
+	}
+	
+	method cosechate() { 
+		game.removeVisual(self) 
+		toni.plantasCosechadas().add(self) 
+		toni.plantasSembradas().remove(self)
+	}
+	
+	method esAptoCeliaco() = true
+}
+
+
+class Maiz inherits Plantas {
 	var property esAdulta = false
-	const property esAptoCeliaco = true
 	
 	method image() {
 		return if (esAdulta and pachamama.estaAgradecida()) { "maiz_gigante_opt.png" } 
@@ -24,13 +40,13 @@ class Maiz {
 	
 	method listaParaCosechar() { return esAdulta }
 	
-	method cosechate() { game.removeVisual(self) toni.plantasSembradas().remove(self) }	
+
 }
 
-class Trigo {
-	var property position
+class Trigo inherits Plantas {
 	var property etapa = 0
-	const property esAptoCeliaco = false
+	
+	override method esAptoCeliaco() = false
 	
 	method image() {
 	
@@ -56,13 +72,10 @@ class Trigo {
 	
 	method listaParaCosechar() { return etapa >= 2 }
 	
-	method cosechate() { game.removeVisual(self) toni.plantasSembradas().remove(self) }
 	
 }
 
-class Tomaco {
-	var property position
-	const property esAptoCeliaco = true
+class Tomaco inherits Plantas {
 	
 	method image() { 
 		return if (pachamama.estaAgradecida()) { "tomaco_podrido.png" }
@@ -72,8 +85,5 @@ class Tomaco {
 	method cuantoOroDa(){ return 80 }
 	method regar() { }
 	method listaParaCosechar() { return true }
-	method cosechate() { game.removeVisual(self) toni.plantasSembradas().remove(self) }	
 }
 
-
-// Agregar las demás plantas y completar el Maiz.

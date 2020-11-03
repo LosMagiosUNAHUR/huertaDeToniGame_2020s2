@@ -3,7 +3,7 @@ import toni.*
 
 
 class Mercado {
-	var property image = "mercado.png"
+	var property image
 	var property position
 	var property oro
 	var property mercaderia = []
@@ -11,6 +11,7 @@ class Mercado {
 	method aceptarCompra(){ 
 		if(oro >= toni.valorCosecha()) {
 		oro -= toni.valorCosecha()
+		game.say(self,"Compra realizada valor " + toni.valorCosecha())
 		mercaderia.addAll(toni.plantasCosechadas())
 		toni.venderCosecha()
 	}
@@ -18,5 +19,3 @@ class Mercado {
 	}
 }	
 	
-	const mercadoCentral = new Mercado(oro=1000,position=game.at(13,7)) 
-	const mercadoChino = new Mercado(oro=10,position=game.at(7,13),image="mercado_chino_opt.png")		

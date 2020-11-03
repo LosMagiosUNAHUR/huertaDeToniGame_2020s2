@@ -6,7 +6,7 @@ object pachamama {
 	
 	method image() {
 		return if (self.estaAgradecida()) { "pachamama-agradecida.png" }
-		else { "pacha_enojada.png" }
+		else { "pachamama_enojada_opt.png" }
 	}
 	
 	method llover() { nivelAgradecimiento += 5 }

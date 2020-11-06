@@ -5,7 +5,7 @@ import pachamama.*
 import mercados.*
 
 const mercadoCentral = new Mercado(oro=1000,position=game.at(13,7),image="mercado.png") 
-const mercadoChino = new Mercado(oro=10,position=game.at(1,7),image="mercado_chino_opt.png")		
+const mercadoChino = new Mercado(oro=100,position=game.at(1,7),image="mercado_chino_opt.png")		
 		
 
 object juego {
@@ -18,9 +18,9 @@ object juego {
 
 
 /*		Acciones de Toni */		
-		keyboard.m().onPressDo({ toni.sembrarMaiz() })
-		keyboard.t().onPressDo({ toni.sembrarTrigo() })
-		keyboard.o().onPressDo({ toni.sembrarTomaco() })
+		keyboard.m().onPressDo({ toni.sembrarPlanta(new Maiz(position=toni.position())) })
+		keyboard.t().onPressDo({ toni.sembrarPlanta(new Trigo(position=toni.position())) })
+		keyboard.o().onPressDo({ toni.sembrarPlanta(new Tomaco(position=toni.position())) })
 		keyboard.c().onPressDo({ toni.cosecharPlanta() })
 		keyboard.x().onPressDo({ toni.cosecharTodo() })
 		keyboard.r().onPressDo({ toni.regarPlanta() })
@@ -30,42 +30,17 @@ object juego {
 			game.say(toni,"Tengo " + toni.oroObtenido() + " de oro " + 
 			" y quedan " + toni.plantasCosechadas().size() + " plantas por vender")
 		})
-		self.configurarMovimiento()
+		keyboard.control().onPressDo({ game.say(toni,"Valor de mi cosecha: " + toni.valorCosecha() ) } )
+	
+/*		Movimientos de Toni  */  		
+		keyboard.up().onPressDo({toni.moverseHaciaArriba()})
+		keyboard.down().onPressDo({toni.moverseHaciaAbajo()})
+		keyboard.left().onPressDo({toni.moverseHaciaLaIzquierda()})
+		keyboard.right().onPressDo({toni.moverseHaciaLaDerecha()})
 		
 	}
 	
-	method configurarMovimiento(){
-/*		Movimientos de Toni  */  		
-		keyboard.up().onPressDo({
-			if(personajeActual.position().y() != game.height() - 1) {
-				personajeActual.position(personajeActual.position().up(1))
-			}
-			else { personajeActual.position( new Position(x=personajeActual.position().x(),y=0) ) }
-		})
-		keyboard.down().onPressDo({
-			if(personajeActual.position().y() != 0){
-				personajeActual.position(personajeActual.position().down(1))
-			}
-			else { personajeActual.position( new Position(x=personajeActual.position().x(),y=game.height() - 1) ) }
-		})
-		keyboard.left().onPressDo({
-			toni.image("toni_izq.png")
-			if(personajeActual.position().x() != 0){
-				personajeActual.position(personajeActual.position().left(1))
-			}
-			else { personajeActual.position( new Position(x=game.width() - 1,y=personajeActual.position().y()))
-			} 
-		})
-		keyboard.right().onPressDo({
-			toni.image("toni.png")
-			if(personajeActual.position().x() != game.width() - 1){
-				personajeActual.position(personajeActual.position().right(1))
-			}
-			else { personajeActual.position( new Position(x=0,y=personajeActual.position().y())) }
-		})
-		
-		
-	}
+	
 	method configurarPersonajes(){
 
 		game.addVisual(toni)

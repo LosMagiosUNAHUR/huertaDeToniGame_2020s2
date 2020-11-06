@@ -83,6 +83,6 @@ class Tomaco inherits Plantas {
 	
 	method cuantoOroDa(){ return 80 }
 	method regar() { }
-	method listaParaCosechar() { return true }
+	method listaParaCosechar() { return not pachamama.estaAgradecida() }
 }
 

@@ -5,11 +5,10 @@ import pachamama.*
 import mercados.*
 
 const mercadoCentral = new Mercado(oro=1000,position=game.at(13,7),image="mercado.png") 
-const mercadoChino = new Mercado(oro=100,position=game.at(1,7),image="mercado_chino_opt.png")		
+const mercadoChino = new Mercado(oro=500,position=game.at(1,7),image="mercado_chino_opt.png")		
 		
 
 object juego {
-	var property personajeActual = toni
 	
 	method configurarTeclado() {
 /* 		Acciones de la Pachamama */

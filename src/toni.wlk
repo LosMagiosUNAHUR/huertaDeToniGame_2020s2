@@ -59,7 +59,7 @@ object toni {
 
 	method cosecharTodo() {
 		self.plantasListasParaCosechar().forEach( { p=>p.cosechate() } )
-		game.say(self,"Total " + plantasCosechadas.size() + " plantas cosechadas")
+		game.say(self,"Total " + plantasCosechadas.size().toString() + " plantas cosechadas")
 	}
 
 	method valorCosecha() {

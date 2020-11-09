@@ -26,10 +26,10 @@ object juego {
 		keyboard.a().onPressDo({ toni.regarLasPlantas() })
 		keyboard.v().onPressDo({ toni.venderEnMercado() })
 		keyboard.space().onPressDo({
-			game.say(toni,"Tengo " + toni.oroObtenido() + " de oro " + 
-			" y quedan " + toni.plantasCosechadas().size() + " plantas por vender")
+			game.say(toni,"Tengo " + toni.oroObtenido().toString() + " de oro " + 
+			" y quedan " + toni.plantasCosechadas().size().toString() + " plantas por vender")
 		})
-		keyboard.control().onPressDo({ game.say(toni,"Valor de mi cosecha: " + toni.valorCosecha() ) } )
+		keyboard.control().onPressDo({ game.say(toni,"Valor de mi cosecha: " + toni.valorCosecha().toString() ) } )
 	
 /*		Movimientos de Toni  */  		
 		keyboard.up().onPressDo({toni.moverseHaciaArriba()})

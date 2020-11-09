@@ -11,7 +11,7 @@ class Mercado {
 	method aceptarCompra(){ 
 		if(oro >= toni.valorCosecha()) {
 		oro -= toni.valorCosecha()
-		game.say(self,"Compra realizada valor " + toni.valorCosecha())
+		game.say(self,"Compra realizada valor " + toni.valorCosecha().toString())
 		mercaderia.addAll(toni.plantasCosechadas())
 		toni.venderCosecha()
 	}

@@ -14,13 +14,12 @@ program huertaDeToni {
 	juego.configurarTeclado()
 	juego.configurarPersonajes()
 	
-	game.whenCollideDo(pachamama,{ elChaboncito => toni.hacerOfrenda(pachamama) } )
+	game.whenCollideDo(pachamama,{ elPibito => toni.hacerOfrenda(pachamama) } )
 	
 	game.showAttributes(mercadoCentral)
 	game.showAttributes(mercadoChino)
 	game.showAttributes(pachamama)
 	
 	game.start()
-
 
 }

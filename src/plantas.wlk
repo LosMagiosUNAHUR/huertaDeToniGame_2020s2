@@ -49,15 +49,8 @@ class Trigo inherits Plantas {
 	
 	override method esAptoCeliaco() = false
 	
-	method image() {
-	
-	if (etapa == 0) { return "trigo_0.png" }
-	else if (etapa == 1) { return "trigo_1.png"  }
-	else if (etapa == 2) { return "trigo_2.png"  }
-	else { return "trigo_3.png"  }
-	
-	}
-	
+	method image() { return "trigo_"+etapa+".png" }
+
 	method cuantoOroDa(){ return if(etapa == 2) { 100}
 		else { 200 }
 		// este método será llamado solo sobre la colección de plantas cosechadas, por esa razón no se contemplan las

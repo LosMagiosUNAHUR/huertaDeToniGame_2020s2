@@ -12,9 +12,7 @@ object toni {
 	var property oroObtenido = 0
 	var property gastoDiario = 200
 
-		
-	// Pegar acá todo lo que tenían de Toni en la etapa 1
-	
+
 	method sembrarPlanta(planta) {
 		if (not self.listaDePosicionesSembradas().contains(self.position()) ) {
 			plantasSembradas.add(planta)
